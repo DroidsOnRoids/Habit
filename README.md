@@ -29,8 +29,8 @@ notification.repeatEvery(_:)
 ```
 
 The parameter is `NotificationBasis` enum type. It lets you choose from:
-* `Minute` – fires in next full minute and do it every 60 seconds,
-* `Hour` – fires in next o'clock hour and do it every 60 minutes,
+* `Minute` – fires in next full minute and does it every 60 seconds,
+* `Hour` – fires in next o'clock hour and does it every 60 minutes,
 * `Day(time: NSDate)` – fires each day at parameter's time (a hour and a minute),
 * `Week(time: NSDate, weekday: Weekday)` – fires every weekday at first parameter's time (a hour and a minute)
 
