@@ -4,13 +4,13 @@
 [![License](https://img.shields.io/cocoapods/l/Habit.svg?style=flat)](http://cocoapods.org/pods/Habit)
 [![Platform](https://img.shields.io/cocoapods/p/Habit.svg?style=flat)](http://cocoapods.org/pods/Habit)
 
-## Usage
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
 ## Requirements
 
 Swift 2.x
+
+## Example
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Installation
 
