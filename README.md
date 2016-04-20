@@ -25,7 +25,7 @@ pod "Habit"
 
 Habit lets you repeat notifications every minute, hour, day or week. It's pretty easy in use and after `UILocalNotification` initialization do just:
 ```swift
-notification.repeateEvery(_:)
+notification.repeatEvery(_:)
 ```
 
 The parameter is `NotificationBasis` enum type. It lets you choose from:
