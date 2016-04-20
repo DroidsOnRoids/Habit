@@ -6,6 +6,4 @@ end
 
 target 'Habit_Tests', :exclusive => true do
   pod 'Habit', :path => '../'
-
-  
 end

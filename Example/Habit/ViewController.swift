@@ -3,22 +3,21 @@
 //  Habit
 //
 //  Created by Piotr Sochalewski on 04/20/2016.
-//  Copyright (c) 2016 Piotr Sochalewski. All rights reserved.
+//  Copyright (c) 2016 Droids On Roids. All rights reserved.
 //
 
 import UIKit
+import Habit
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let notification = UILocalNotification()
+        notification.alertBody = "Example notification"
+        notification.repeatNotificationEvery(.Day(time: NSDate()))
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
-
