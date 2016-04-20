@@ -11,7 +11,7 @@ import Foundation
 /**
  The day of the weekday unit for the receiver.
  */
-enum Weekday: Int {
+public enum Weekday: Int {
     case Monday = 2
     case Tuesday = 3
     case Wednesday = 4
@@ -21,7 +21,7 @@ enum Weekday: Int {
     case Sunday = 1
 }
 
-enum NotificationBasis {
+public enum NotificationBasis {
     /**
      The minute unit.
      Makes the notification delivered each round minute.
@@ -47,14 +47,14 @@ enum NotificationBasis {
     case Week(time: NSDate, weekday: Weekday)
 }
 
-extension UILocalNotification {
+public extension UILocalNotification {
     /**
      Sets the calendar interval at which to reschedule the notification.
      Also sets the first date and time when the system should deliver the notification.
      
      @param basis: the unit for 
      */
-    func repeatEvery(basis: NotificationBasis) -> UILocalNotification {
+    public func repeatEvery(basis: NotificationBasis) -> UILocalNotification {
         timeZone = NSCalendar.currentCalendar().timeZone
         
         let calendar = NSCalendar.currentCalendar()
@@ -91,11 +91,11 @@ extension UILocalNotification {
     }
 }
 
-extension NSDate {
+public extension NSDate {
     /**
      Returns the next date after the current date with given an hour and a minute.
      */
-    func nextDate() -> NSDate? {
+    public func nextDate() -> NSDate? {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Hour, .Minute], fromDate: self)
         
