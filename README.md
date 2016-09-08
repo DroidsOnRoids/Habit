@@ -6,7 +6,7 @@
 
 ## Requirements
 
-Swift 2.x
+Swift 3
 
 ## Example
 
@@ -18,7 +18,7 @@ Habit is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "Habit"
+pod "Habit", :git => 'https://github.com/DroidsOnRoids/Habit', :branch => 'swift3'
 ```
 
 ## Usage
@@ -31,8 +31,8 @@ notification.repeatEvery(_:)
 The parameter is `NotificationBasis` enum type. It lets you choose from:
 * `Minute` – fires in next full minute and does it every 60 seconds,
 * `Hour` – fires in next o'clock hour and does it every 60 minutes,
-* `Day(time: NSDate)` – fires each day at parameter's time (an hour and a minute),
-* `Week(time: NSDate, weekday: Weekday)` – fires every weekday at first parameter's time (an hour and a minute)
+* `Day(time: Date)` – fires each day at parameter's time (an hour and a minute),
+* `Week(time: Date, weekday: Weekday)` – fires every weekday at first parameter's time (an hour and a minute)
 
 ## Author
 

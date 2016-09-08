@@ -16,8 +16,8 @@ class ViewController: UIViewController {
         
         let notification = UILocalNotification()
         notification.alertBody = "Example notification"
-        notification.repeatEvery(.Day(time: NSDate()))
+        _ = notification.repeatEvery(.day(time: Date()))
         
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        UIApplication.shared.scheduleLocalNotification(notification)
     }
 }

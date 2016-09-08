@@ -13,13 +13,13 @@ import UIKit
  The day of the weekday unit for the receiver.
  */
 public enum Weekday: Int {
-    case Monday = 2
-    case Tuesday = 3
-    case Wednesday = 4
-    case Thursday = 5
-    case Friday = 6
-    case Saturday = 7
-    case Sunday = 1
+    case monday = 2
+    case tuesday = 3
+    case wednesday = 4
+    case thursday = 5
+    case friday = 6
+    case saturday = 7
+    case sunday = 1
 }
 
 public enum NotificationBasis {
@@ -28,28 +28,28 @@ public enum NotificationBasis {
      
      Makes the notification delivered each round minute.
      */
-    case Minute
+    case minute
     
     /**
      The hour unit.
      
      Makes the notification delivered each round hour.
      */
-    case Hour
+    case hour
     
     /**
      The day unit.
      
      Makes the notification delivered each day at the time (an hour and a minute) given in the parameter.
      */
-    case Day(time: NSDate)
+    case day(time: Date)
     
     /**
      The week unit.
      
      Makes the notification delivered weekly at the time (an hour and a minute) and weekday given in the parameter.
      */
-    case Week(time: NSDate, weekday: Weekday)
+    case week(time: Date, weekday: Weekday)
 }
 
 public extension UILocalNotification {
@@ -60,51 +60,51 @@ public extension UILocalNotification {
      
      @param basis: the unit for the repeat interval.
      */
-    public func repeatEvery(basis: NotificationBasis) -> UILocalNotification {
-        timeZone = NSCalendar.currentCalendar().timeZone
-        
-        let calendar = NSCalendar.currentCalendar()
+    public func repeatEvery(_ basis: NotificationBasis) -> UILocalNotification {
+        let calendar = NSCalendar.current
+
+        timeZone = calendar.timeZone
         
         switch basis {
-        case .Minute:
-            repeatInterval = .Minute
+        case .minute:
+            repeatInterval = .minute
             
-            let components = calendar.components(.Minute, fromDate: NSDate())
+            var components = calendar.dateComponents([.minute], from: Date())
             components.second = 0
-            fireDate = calendar.dateFromComponents(components)?.dateByAddingTimeInterval(60)
+            fireDate = calendar.date(from: components)?.addingTimeInterval(60)
             
-        case .Hour:
-            repeatInterval = .Hour
+        case .hour:
+            repeatInterval = .hour
             
-            let components = calendar.components(.Hour, fromDate: NSDate())
+            var components = calendar.dateComponents([.hour], from: Date())
             components.minute = 0
             components.second = 0
-            fireDate = calendar.dateFromComponents(components)?.dateByAddingTimeInterval(3600)
+            fireDate = calendar.date(from: components)?.addingTimeInterval(3600)
             
-        case .Day(let time):
-            repeatInterval = .Day
-            fireDate = time.nextDate()
+        case .day(let time):
+            repeatInterval = .day
+            fireDate = time.nextDate
             
-        case .Week(let time, let weekday):
-            repeatInterval = .WeekOfYear
+        case .week(let time, let weekday):
+            repeatInterval = .weekOfYear
             
-            let components = calendar.components([.Year, .Hour, .Minute, .WeekOfYear], fromDate: time)
+            var components = calendar.dateComponents([.year, .hour, .minute, .weekOfYear], from: time)
             components.weekday = weekday.rawValue
-            fireDate = calendar.dateFromComponents(components)?.nextDate()
+            fireDate = calendar.date(from: components)?.nextDate
         }
         
         return self
     }
 }
 
-public extension NSDate {
+public extension Date {
     /**
      Returns the next date after the current date with given an hour and a minute.
      */
-    public func nextDate() -> NSDate? {
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Hour, .Minute], fromDate: self)
+    public var nextDate: Date? {
+        let calendar = NSCalendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: self)
         
-        return calendar.nextDateAfterDate(NSDate(), matchingComponents: components, options: .MatchNextTimePreservingSmallerUnits)
+        return calendar.nextDate(after: Date(), matching: components, matchingPolicy: .nextTimePreservingSmallerComponents)
     }
 }
