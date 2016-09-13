@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 /**
  The day of the weekday unit for the receiver.
@@ -55,12 +56,11 @@ public enum NotificationBasis {
 public extension UILocalNotification {
     /**
      Sets the calendar interval at which to reschedule the notification.
-     
      Also sets the first date and time when the system should deliver the notification.
      
      @param basis: the unit for the repeat interval.
      */
-    public func repeatEvery(_ basis: NotificationBasis) -> UILocalNotification {
+    public func repeatEvery(_ basis: NotificationBasis) -> Self {
         let calendar = NSCalendar.current
 
         timeZone = calendar.timeZone
@@ -97,7 +97,44 @@ public extension UILocalNotification {
     }
 }
 
-public extension Date {
+@available(iOS 10.0, tvOS 10.0, watchOS 3.0, *)
+public extension UNNotificationContent {
+    /**
+     Sets the calendar interval at which to reschedule the notification.
+     Sets the first date and time when the system should deliver the notification.
+     
+     Also creates `UNNotificationRequest` and then adds it user notification center object for your app or app extension.
+     
+     @param basis: the unit for the repeat interval.
+     */
+    public func repeatEvery(_ basis: NotificationBasis) -> Self {
+        var dateComponents = DateComponents()
+        
+        switch basis {
+        case .minute:
+            dateComponents.second = 0
+            
+        case .hour:
+            dateComponents.minute = 0
+            dateComponents.second = 0
+            
+        case .day(let time):
+            dateComponents = NSCalendar.current.dateComponents([.hour, .minute, .second], from: time)
+            
+        case .week(let time, let weekday):
+            dateComponents = NSCalendar.current.dateComponents([.year, .hour, .minute, .weekOfYear], from: time)
+            dateComponents.weekday = weekday.rawValue
+        }
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: "HabitNotificationRequest", content: self, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        return self
+    }
+}
+
+fileprivate extension Date {
     /**
      Returns the next date after the current date with given an hour and a minute.
      */

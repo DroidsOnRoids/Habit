@@ -23,7 +23,7 @@ pod "Habit", :git => 'https://github.com/DroidsOnRoids/Habit', :branch => 'swift
 
 ## Usage
 
-Habit lets you repeat notifications every minute, hour, day or week. It's pretty easy in use and after `UILocalNotification` initialization do just:
+Habit lets you repeat notifications every minute, hour, day or week. It's pretty easy in use and after `UILocalNotification` or `UNMutableNotificationContent` (iOS 10.0+ only) initialization do just:
 ```swift
 notification.repeatEvery(_:)
 ```
