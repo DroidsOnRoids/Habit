@@ -138,7 +138,7 @@ fileprivate extension Date {
     /**
      Returns the next date after the current date with given an hour and a minute.
      */
-    public var nextDate: Date? {
+    var nextDate: Date? {
         let calendar = NSCalendar.current
         let components = calendar.dateComponents([.hour, .minute], from: self)
         
