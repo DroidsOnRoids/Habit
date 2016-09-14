@@ -6,6 +6,8 @@
 
 ## Requirements
 
+iOS 8.0+, watchOS 2.0+, tvOS 10.0+
+
 Swift 3
 
 ## Example
@@ -18,7 +20,7 @@ Habit is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "Habit", :git => 'https://github.com/DroidsOnRoids/Habit', :branch => 'swift3'
+pod "Habit"
 ```
 
 ## Usage

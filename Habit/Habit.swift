@@ -53,6 +53,8 @@ public enum NotificationBasis {
     case week(time: Date, weekday: Weekday)
 }
 
+#if os(iOS) || os(watchOS)
+@available(iOS 8.0, watchOS 2.0, *)
 public extension UILocalNotification {
     /**
      Sets the calendar interval at which to reschedule the notification.
@@ -96,6 +98,7 @@ public extension UILocalNotification {
         return self
     }
 }
+#endif
 
 @available(iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public extension UNNotificationContent {
