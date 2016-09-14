@@ -6,7 +6,7 @@
 
 ## Requirements
 
-Swift 2.x
+Swift 2.2
 
 ## Example
 
@@ -18,7 +18,7 @@ Habit is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "Habit"
+pod "Habit", :git => "https://github.com/DroidsOnRoids/Habit", :branch => "swift-2.2"
 ```
 
 ## Usage
