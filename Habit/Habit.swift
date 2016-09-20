@@ -63,7 +63,7 @@ public extension UILocalNotification {
      @param basis: the unit for the repeat interval.
      */
     public func repeatEvery(_ basis: NotificationBasis) -> Self {
-        let calendar = NSCalendar.current
+        let calendar = Calendar.current
 
         timeZone = calendar.timeZone
         
@@ -122,10 +122,10 @@ public extension UNNotificationContent {
             dateComponents.second = 0
             
         case .day(let time):
-            dateComponents = NSCalendar.current.dateComponents([.hour, .minute, .second], from: time)
+            dateComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: time)
             
         case .week(let time, let weekday):
-            dateComponents = NSCalendar.current.dateComponents([.year, .hour, .minute, .weekOfYear], from: time)
+            dateComponents = Calendar.current.dateComponents([.year, .hour, .minute, .weekOfYear], from: time)
             dateComponents.weekday = weekday.rawValue
         }
         
@@ -142,7 +142,7 @@ fileprivate extension Date {
      Returns the next date after the current date with given an hour and a minute.
      */
     var nextDate: Date? {
-        let calendar = NSCalendar.current
+        let calendar = Calendar.current
         let components = calendar.dateComponents([.hour, .minute], from: self)
         
         return calendar.nextDate(after: Date(), matching: components, matchingPolicy: .nextTimePreservingSmallerComponents)
